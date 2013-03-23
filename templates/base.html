@@ -5,10 +5,12 @@
         <title>{% block title %}Minibay{% endblock %}</title>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' />
         <link href='http://tesla.dionyziz.com/static/css/minibay.css' rel='stylesheet' />
+        <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
     </head>
-    <body id="minibay-{% block id %}default{% endblock %}">
+    <body id="minibay-{% block id %}default{% endblock %}" style="background-image: {% block background %}none{% endblock %}">
         <div id="content">
             {% block content %}{% endblock %}
         </div>
+        <script src='http://tesla.dionyziz.com/static/js/minibay.js'></script>
     </body>
 </html>

@@ -2,10 +2,11 @@ body, input {
     font-family: 'Open Sans Condensed', sans-serif;
     margin: auto;
     display: block;
+    background-size: cover;
 }
 input {
     font-size: 50px;
-    padding: 5px;
+    padding: 5px 5px 8px 5px;
     border: 1px solid #ccc;
     margin: 100px auto;
     width: 690px;
@@ -15,13 +16,19 @@ input {
     float: left;
     margin: 0 10px 0 0;
 }
-.playing {
+.playing, .loading {
     width: 700px;
     margin: auto;
     overflow: auto;
     background-color: #f4f5f7;
     border: 1px solid #e6e7ea;
     border-bottom-style: none;
+}
+.loading {
+    width: 690px;
+    border-bottom-style: solid;
+    padding: 5px;
+    text-align: center;
 }
 .player {
     position: fixed;
@@ -49,14 +56,18 @@ input {
     left: 0;
     line-height: 2px;
 }
-.progressbar {
-    margin: 0 123px 0 75px;
+.jp-seek-bar {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.jp-progress {
+    margin: 0 123px 0 30px;
     height: 100%;
     border: 1px solid #e0e2e6;
     border-style: none solid none solid;
-    cursor: pointer;
 }
-.progress {
+.jp-play-bar {
     width: 30%;
     height: 100%;
     background-color: #00adef;
@@ -95,6 +106,7 @@ input {
     height: 25px;
     background-color: #e9ebef;
     border-bottom: 3px solid #e0e2e6;
+    position: relative;
 }
 .controls {
     float: left;
@@ -105,4 +117,35 @@ input {
 }
 h2, h3, h4 {
     margin: 10px;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+#jp_container_1 {
+    margin: auto;
+}
+.jp-volume-bar {
+    background-color: gray;
+	position: absolute;
+	width: 75px;
+    right: 16px;
+    top: 12px;
+}
+.jp-volume-bar-value {
+    background-color: black;
+}
+.jp-mute, .jp-unmute {
+    display: block;
+    float: left;
+    padding: 7px 5px;
+}
+.volume-control {
+    width: 120px;
+    height: 25px;
+    float: right;
 }

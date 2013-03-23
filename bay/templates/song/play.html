@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-    Playing song: {{ song.name }}<br />
-    Magnet link: {{ torrent.get_magnet }}<br />
+    {% include "song/search-form.html" %}
     {% if available %}
-    <a href='/bay/download/{{ song.id }}'>Download {{ song.name }}</a><br />
-    <link type="text/css" href="http://tesla.dionyziz.com/static/jplayer/blue.monday/jplayer.blue.monday.css" rel="stylesheet" />
-    <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+    <link href="http://tesla.dionyziz.com/static/jplayer/blue.monday/jplayer.blue.monday.css" rel="stylesheet" />
     <script src='http://tesla.dionyziz.com/static/jplayer/jquery.jplayer.min.js'></script>
       <script type="text/javascript">
         $(document).ready(function(){
@@ -23,31 +20,43 @@
 
       <div id="jquery_jplayer_1" class="jp-jplayer"></div>
       <div id="jp_container_1" class="jp-audio">
-        <div class="jp-type-single">
-          <div class="jp-gui jp-interface">
-            <ul class="jp-controls">
-              <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
-              <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-              <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
-              <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
-            </ul>
+        <div class='playing'>
+            Playing {{ song.name }}<br />
+            <a href='/bay/download/{{ song.id }}'>Download song</a><br />
+            <!--
+            <div class="jp-time-holder">
+              <div class="jp-current-time"></div>
+              <div class="jp-duration"></div>
+            </div>
+            -->
+        </div>
+        <div class='seeker'>
+            <div class='volume-control'>
+                <img src='http://tesla.dionyziz.com/static/images/unmute.png' alt='Mute' width='16' class='jp-mute' />
+                <img src='http://tesla.dionyziz.com/static/images/mute.png' alt='Unmute' width='16' class='jp-unmute' />
+                <div class="jp-volume-bar">
+                    <div class="jp-volume-bar-value"></div>
+                </div>
+            </div>
+            <div class='controls'>
+                <!-- <img src='http://tesla.dionyziz.com/static/images/prev.png' alt='Previous song' width='22' /> -->
+                <img src='http://tesla.dionyziz.com/static/images/play.png' alt='Play' width='22' class='jp-play' />
+                <img src='http://tesla.dionyziz.com/static/images/pause.png' alt='Pause' width='22' class='jp-pause' />
+                <!-- <img src='http://tesla.dionyziz.com/static/images/next.png' alt='Next song' width='22' /> -->
+            </div>
             <div class="jp-progress">
               <div class="jp-seek-bar">
                 <div class="jp-play-bar"></div>
               </div>
             </div>
-            <div class="jp-volume-bar">
-              <div class="jp-volume-bar-value"></div>
-            </div>
-            <div class="jp-time-holder">
-              <div class="jp-current-time"></div>
-              <div class="jp-duration"></div>
-            </div>
-          </div>
         </div>
       </div>
     {% else %}
-        Your song will play in {{ eta }}.
+        <div class='loading'>
+            Downloading {{ song.name }}<br />
+            <!-- Magnet link: {{ torrent.get_magnet }}<br /> -->
+            Your song will play in {{ eta }}.
+        </div>
         <script>
             setTimeout(function() {
                 window.location.reload(true);

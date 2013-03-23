@@ -1,13 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <form action='/bay/search' method='get'>
-        <input type='text' placeholder='Type any song' name='text' id='text' />
-    </form>
-    <script>
-        document.getElementsByTagName('form')[0].onsubmit = function() {
-            window.location.href = '/bay/search/' + document.getElementById('text').value;
-            return false;
-        }
-    </script>
+{% include "song/search-form.html" %}
 {% endblock %}
 {% block id %}search{% endblock %}
+{% block background %}url('http://tesla.dionyziz.com/static/images/{{ image.file }}'){% endblock %} 
