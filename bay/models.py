@@ -5,6 +5,9 @@ from django.conf import settings
 import transmissionrpc
 
 
+# TODO: Maintain a 'last_wanted' field per-torrent and per-file containing date of last use of a torrent/file
+#       for cleanup purposes
+
 class Torrent(models.Model):
     description = models.TextField()
     title = models.CharField(max_length=1024)
