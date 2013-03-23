@@ -50,14 +50,14 @@ To install this on your own server, follow these steps. I have included the part
  * Build the database using `manage.py syncdb`. You have to do this after modifying my.cfg!
  * [Enable south on the django app](http://south.readthedocs.org/en/latest/convertinganapp.html#converting-an-app)
  * Make sure your tables use the MyISAM engine.
- * Create a FULLTEXT index on the column bay_files.name by manually running South migration #0004 or by issuing the appropriate SQL query.
+ * Create a FULLTEXT index on the column bay_files.name by manually running South migration #0004 or by issuing the appropriate SQL query. This can take several minutes.
  * Configure apache. A sample configuration file is provided at minibay/apache.conf.
  * Download The Pirate Base database from the following archives onto your server:
 
-  * [The Pirate Bay 3200000 - 7700000](https://thepiratebay.se/torrent/7706886/Backup_of_The_Pirate_Bay_(IDs__3200000_-_7700000))
-  * [The Pirate Bay 7700000 - 7999999](https://thepiratebay.se/torrent/8044295/Backup_of_The_Pirate_Bay_(IDs__7700000_-_7999999)_)
+  * [The Pirate Bay 3200000 - 7700000](https://thepiratebay.se/torrent/7706886)
+  * [The Pirate Bay 7700000 - 7999999](https://thepiratebay.se/torrent/8044295)
   * If you want more recent torrents available [git clone tpb2csv and export Pirate Bay to csv manually](https://github.com/andronikov/tpb2csv)
- * If you downloaded one of the archives, you should have a folder with .7z files. To import, run the following command in it, after verifying that directory structure is correct by looking at the source code of the .sh file, to import. Importing can take a couple of days, so you may want to run it under `screen`.
+ * If you downloaded one of the archives, you should have a folder with .7z files. To import, run the following command in it, after verifying that directory structure is correct by looking at the source code of the .sh file Importing can take a couple of **days**, so you may want to run it under `screen`.
 
          /home/minibay/minibay-django/scripts/import-tpb.sh
  
