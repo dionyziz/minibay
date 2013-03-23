@@ -52,14 +52,17 @@ To install this on your own server, follow these steps. I have included the part
  * Make sure your tables use the MyISAM engine.
  * Create a FULLTEXT index on the column bay_files.name by manually running South migration #0004 or by issuing the appropriate SQL query. This can take several minutes.
  * Configure apache. A sample configuration file is provided at minibay/apache.conf.
- * Download The Pirate Base database from the following archives onto your server:
+ * Download The Pirate Base database from the following archives onto your server. This download can take a couple of *days* depending on your connection speed. Please seed.
 
   * [The Pirate Bay 3200000 - 7700000](https://thepiratebay.se/torrent/7706886)
   * [The Pirate Bay 7700000 - 7999999](https://thepiratebay.se/torrent/8044295)
   * If you want more recent torrents available [git clone tpb2csv and export Pirate Bay to csv manually](https://github.com/andronikov/tpb2csv)
- * If you downloaded one of the archives, you should have a folder with .7z files. To import, run the following command in it, after verifying that directory structure is correct by looking at the source code of the .sh file Importing can take a couple of **days**, so you may want to run it under `screen`.
+ * If you downloaded one of the archives, you should have a folder with .7z files. To import, run the following command in it, after verifying that directory structure is correct by looking at the source code of the .sh file. Importing can take a couple of **days**, so you may want to run it under `screen`.
 
          /home/minibay/minibay-django/scripts/import-tpb.sh
  
  * Otherwise, if you just have plain directories that you have manually exported, directly run `manage.py import-tbp` with the appropriate arguments in a for loop.
  * You can now get rid of the .7z and .csv files, as everything is in MySQL.
+ * Alternatively, if you don not want to download the archive via torrent and go through importing it, you can download a mysqlhotdump for the range 3200000 - 7700000 directly:
+  * [bay_file](http://tesla.dionyziz.com/static/bay-file-backup.tar.gz)
+  * [bay_torrent](http://tesla.dionyziz.com/static/bay-torrent-backup.tar.gz)
