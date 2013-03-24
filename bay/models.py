@@ -5,6 +5,10 @@ from django.conf import settings
 import transmissionrpc
 
 
+class Word(models.Model):
+    word = models.CharField(max_length=255, unique=True)
+    count = models.IntegerField(default=0)
+
 # TODO: Maintain a 'last_wanted' field per-torrent and per-file containing date of last use of a torrent/file
 #       for cleanup purposes
 
