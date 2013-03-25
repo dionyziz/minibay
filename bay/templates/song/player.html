@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#jquery_jplayer_1").jPlayer({
+            ready: function () {
+                $(this).jPlayer("setMedia", {
+                    mp3: "/bay/download/{{ file_id }}"
+                }).jPlayer('play');
+            },
+            swfPath: "/static/jplayer",
+            supplied: "mp3"
+        });
+    });
+    var file_id = '{{ file_id|escapejs }}';
+</script>
+
+<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+<div id="jp_container_1" class="jp-audio">
+    <div class='playing'>
+        {% if meta.thumb %}
+            <img src='{{ meta.thumb }}' alt='{{ meta.album }}' class='art' width='150' height='150' />
+        {% endif %}
+        <h2>{{ meta.artist }}</h2>
+        <h3>{{ meta.album }}</h3>
+        <h4>{{ meta.title }} <a href='/bay/download/{{ song.id }}'><img src='http://tesla.dionyziz.com/static/images/download.png' alt='Download' width='16' /></a>
+        </h4>
+        <!--
+        <div class="jp-time-holder">
+          <div class="jp-current-time"></div>
+          <div class="jp-duration"></div>
+        </div>
+        -->
+    </div>
+    <div class='seeker'>
+        <div class='volume-control'>
+            <img src='http://tesla.dionyziz.com/static/images/unmute.png' alt='Mute' width='16' class='jp-mute' />
+            <img src='http://tesla.dionyziz.com/static/images/mute.png' alt='Unmute' width='16' class='jp-unmute' />
+            <div class="jp-volume-bar">
+                <div class="jp-volume-bar-value"></div>
+            </div>
+        </div>
+        <div class='controls'>
+            <!-- <img src='http://tesla.dionyziz.com/static/images/prev.png' alt='Previous song' width='22' /> -->
+            <img src='http://tesla.dionyziz.com/static/images/play.png' alt='Play' width='22' class='jp-play' />
+            <img src='http://tesla.dionyziz.com/static/images/pause.png' alt='Pause' width='22' class='jp-pause' />
+            <!-- <img src='http://tesla.dionyziz.com/static/images/next.png' alt='Next song' width='22' /> -->
+        </div>
+        <div class="jp-progress">
+          <div class="jp-seek-bar">
+            <div class="jp-play-bar"></div>
+          </div>
+        </div>
+    </div>
+</div>
