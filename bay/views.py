@@ -9,28 +9,34 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.conf import settings
 
-from bay.models import File
+from mobi.decorators import detect_mobile
 
 from bay.models import File
 from mutagen.easyid3 import EasyID3
 import discogs_client as discogs
 
+@detect_mobile
 def download(request, id):
     file = File.objects.get(pk=id)
     local_file_name = file.get_local_file_name()
 
-    response = HttpResponse(mimetype='application/force-download')
+    if request.mobile:
+        response = HttpResponse(mimetype='audio/mpeg')
+    else:
+        response = HttpResponse(mimetype='application/force-download')
     response['X-SENDFILE'] = local_file_name
     whitelist_filename = os.path.basename(local_file_name)
     whitelist_characters = [' ', '.', '-', '\'']
     whitelist_filename = ''.join(c for c in whitelist_filename if c in whitelist_characters or c.isalnum())
     sys.stderr.write(whitelist_filename + '\n')
-    response['Content-Disposition'] = 'attachment; filename=%s' % whitelist_filename
+    if not request.mobile:
+        response['Content-Disposition'] = 'attachment; filename=%s' % whitelist_filename
     response['Content-type'] = 'audio/mpeg'
     response['Content-length'] = os.stat(local_file_name).st_size
 
     return response
 
+@detect_mobile
 def listen(request, file_id, q):
     file = File.objects.get(pk=file_id)
     torrent = file.torrent
