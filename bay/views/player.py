@@ -1,8 +1,9 @@
 import datetime
+import threading
 
-from django.template import Context, loader
 from django.conf import settings
 from django.http import HttpResponse
+from django.shortcuts import render
 from mobi.decorators import detect_mobile
 
 from mutagen.easyid3 import EasyID3
@@ -15,8 +16,6 @@ from bay.models import File
 def player(request, file_id, q):
     file = File.objects.get(pk=file_id)
     torrent = file.torrent
-
-    template = loader.get_template('song/play.html')
 
     file_available = file.available()
 
@@ -70,7 +69,7 @@ def player(request, file_id, q):
     except:
         eta = datetime.timedelta(minutes=5)
 
-    context = Context({
+    context = {
         'song': file,
         'torrent': torrent,
         'file_id': file.id,
@@ -78,7 +77,7 @@ def player(request, file_id, q):
         'eta': eta,
         'q': q,
         'meta': meta
-    })
+    }
 
     def lazy_process():
         file.download()
@@ -88,4 +87,4 @@ def player(request, file_id, q):
         t.setDaemon(False)
         t.start()
 
-    return HttpResponse(template.render(context))
+    return render(request, 'song/play.html', context)

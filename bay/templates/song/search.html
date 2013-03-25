@@ -3,4 +3,4 @@
 {% include "song/search-form.html" %}
 {% endblock %}
 {% block id %}search{% endblock %}
-{% block background %}url('http://tesla.dionyziz.com/static/images/{{ image.file }}'){% endblock %} 
+{% block background %}url('{{ STATIC_URL }}images/{{ image.file }}'){% endblock %} 

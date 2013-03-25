@@ -1,6 +1,5 @@
 import os
 import sys
-import threading
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse

@@ -4,16 +4,16 @@
         <meta charset='utf-8' />
         <title>{% block title %}Minibay{% endblock %}</title>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' />
-        <link href='http://tesla.dionyziz.com/static/css/minibay.css' rel='stylesheet' />
+        <link href='{{ STATIC_URL }}css/minibay.css' rel='stylesheet' />
         <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
-        <link rel='icon' type='image/png' href='http://tesla.dionyziz.com/static/images/favicon.png' />
-        <link href="http://tesla.dionyziz.com/static/jplayer/blue.monday/jplayer.blue.monday.css" rel="stylesheet" />
+        <link rel='icon' type='image/png' href='{{ STATIC_URL }}images/favicon.png' />
+        <link href="{{ STATIC_URL }}jplayer/blue.monday/jplayer.blue.monday.css" rel="stylesheet" />
     </head>
     <body id="minibay-{% block id %}default{% endblock %}" style="background-image: {% block background %}none{% endblock %}">
         <div id="content">
             {% block content %}{% endblock %}
         </div>
-        <script src='http://tesla.dionyziz.com/static/js/minibay.js'></script>
-        <script src='http://tesla.dionyziz.com/static/jplayer/jquery.jplayer.min.js'></script>
+        <script src='{{ STATIC_URL }}js/minibay.js'></script>
+        <script src='{{ STATIC_URL }}jplayer/jquery.jplayer.min.js'></script>
     </body>
 </html>
