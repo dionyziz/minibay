@@ -2,10 +2,10 @@
 * Communication with transmission is slow, avoid by caching some info
 * better progress bar/indicator when downloading
 * Some torrents simply don't start, remove them eventually
-* Clean up
+* Clean up code
+* Clean up older torrents
 * Exact phrase lookup
 * WSGI auto restart
-* favicon
 * UI fix: Add a brief "Now Playing" clarification text
 * UI fix: Downloading
 * UI fix: Searching
