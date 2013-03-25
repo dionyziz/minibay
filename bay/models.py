@@ -172,7 +172,7 @@ class File(models.Model):
                                 'ORDER BY '
                                 '    score * pow(seeders, 0.2) DESC '
                                 'LIMIT 1 ',
-                                [text, text])[0]
+                                (text, text))[0]
 
     def get_local_file_name(self):
         file_name = self.name
