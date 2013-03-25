@@ -1,7 +1,9 @@
 import os
+import logging
 
 from django.db import models
 from django.conf import settings
+
 import transmissionrpc
 
 
@@ -15,13 +17,22 @@ class Word(models.Model):
 class Torrent(models.Model):
     description = models.TextField()
     title = models.CharField(max_length=1024)
-    seeders = models.IntegerField(default=0)
+    folder = models.CharField(max_length=1024, default='')
+    seeders = models.IntegerField(default=0, db_index=True)
     leechers = models.IntegerField(default=0)
     uploaded = models.DateTimeField('date uploaded')
     uploader = models.CharField(max_length=1024)
     infohash = models.CharField(max_length=2048)
 
     def get_transmission_connection(self):
+        logger = logging.getLogger('minibay')
+        hdlr = logging.FileHandler('/home/minibay/minibay.log')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        hdlr.setFormatter(formatter)
+        logger.addHandler(hdlr) 
+        logger.setLevel(logging.WARNING)
+        logger.error('Transmission connection')
+
         return transmissionrpc.Client(
             settings.TRANSMISSION['HOST'],
             port=settings.TRANSMISSION['PORT'],
@@ -111,16 +122,18 @@ class Torrent(models.Model):
         return torrent_exists
 
     def get_download_dir(self):
-        tc = self.get_transmission_connection()
-        torrents = tc.get_torrents()
-        for torrent in torrents:
-            if torrent.hashString.lower() == self.infohash.lower():
-                name = torrent.name
-                if not name:
-                    # torrent meta data not yet retrieved from DHT
-                    raise TypeError
-                return '%s/%i/%s' % (settings.DOWNLOAD_DIR, self.id, name)
-        raise TypeError
+        if not self.folder:
+            tc = self.get_transmission_connection()
+            torrents = tc.get_torrents()
+            for torrent in torrents:
+                if torrent.hashString.lower() == self.infohash.lower():
+                    name = torrent.name
+                    self.folder = name
+                    self.save()
+                    if not name:
+                        # torrent meta data not yet retrieved from DHT
+                        raise TypeError
+        return '%s/%i/%s' % (settings.DOWNLOAD_DIR, self.id, self.folder)
 
     def get_magnet(self):
         return 'magnet:?xt=urn:btih:' + self.infohash
