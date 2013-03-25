@@ -133,6 +133,10 @@ class Torrent(models.Model):
                     if not name:
                         # torrent meta data not yet retrieved from DHT
                         raise TypeError
+        if self.file_set.count() == 1:
+            # single-file torrent mode
+            return '%s/%i' % (settings.DOWNLOAD_DIR, self.id)
+        # multi-file torrent mode
         return '%s/%i/%s' % (settings.DOWNLOAD_DIR, self.id, self.folder)
 
     def get_magnet(self):
