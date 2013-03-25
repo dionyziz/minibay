@@ -156,6 +156,7 @@ class File(models.Model):
 
     @classmethod
     def search(cls, text):
+        # TODO: handle song not found case
         return File.objects.raw('SELECT '
                                 '    f.id, f.name, '
                                 '    t.title, t.seeders, t.infohash, '

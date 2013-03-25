@@ -158,6 +158,11 @@ LOGGING = {
     }
 }
 
+PROJECT = {
+    'NAME': 'Minibay',
+    'VERSION': '0.2'
+}
+
 TRANSMISSION = {
     'HOST': 'localhost',
     'PORT': 9091,
