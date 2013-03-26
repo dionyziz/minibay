@@ -28,19 +28,11 @@ To install this on your own server, follow these steps. I have included the part
   * /var/www/yourdomain.example.com/static - To store your static files
  * [Set up transmission-daemon](http://www.webupd8.org/2009/12/setting-up-transmission-remote-gui-in.html) with a username and a password and make it run on system startup.
  * Verify that transmission is installed correctly by connecting to it using Transmission Remote GUI.
- * In your virtualenv or globally, install these python modules:
-  * BitTorrent-bencode==5.0.8.1
-  * Django==1.5
-  * MySQL-python==1.2.2
-  * South==0.7.6
-  * Unidecode==0.04.12
-  * progressbar==2.3
-  * transmissionrpc==0.9
-  * wsgiref==0.1.2
+ * pip install -r requirements.txt
  * Install the following Apache modules:
   * mod_wsgi
   * mod_xsendfile
- * git clone [this repository](https://github.com/dionyziz/minibay) into /home/minibay/minibay-django
+ * git clone [https://github.com/dionyziz/minibay.git](https://github.com/dionyziz/minibay) /home/minibay/minibay-django
  * Create a MySQL database and a user for it, with a username and a password and full permissions on the database.
  * Create the file settings-local.py next to settings.py in the folder minibay-django/minibay and include:
   * Your MySQL username and password
