@@ -4,7 +4,7 @@ from django.shortcuts import render
 from bay.models import File
 
 
-def homepage(request):
+def homepage(request, q = '', error = '', suggestion = None):
     backgrounds = (
         ('string_of_pearls.jpg', 'Gilles Chirole'),
         ('soprano_saxophone.jpg', 'soupboy'),
@@ -25,11 +25,17 @@ def homepage(request):
 
     background = random.choice(backgrounds)
 
+    if not q:
+        q = ''
+
     ctx = {
         'image': {
             'file': background[0],
             'author': background[1]
-        }
+        },
+        'q': q,
+        'error': error,
+        'suggestion': suggestion
     }
 
     return render(request, 'song/search.html', ctx)

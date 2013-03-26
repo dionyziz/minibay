@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 {% include "song/search-form.html" %}
+{% if error %}
+    <div class='error'>
+        <div class='message'>
+            {{ error }}
+        </div>
+        How about <a href='/bay/listen/{{ suggestion.id }}/{{ suggestion.q|urlencode }}'>{{ suggestion.text }}</a>?
+    </div>
+{% endif %}
 {% endblock %}
 {% block id %}search{% endblock %}
 {% block background %}url('{{ STATIC_URL }}images/{{ image.file }}'){% endblock %} 

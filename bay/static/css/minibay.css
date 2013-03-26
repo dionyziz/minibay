@@ -4,6 +4,24 @@ body, input {
     display: block;
     background-size: cover;
 }
+a, a:visited {
+    color: #3264be;
+}
+.error {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    margin: auto;
+    display: block;
+    width: 500px;
+    border-radius: 5px;
+}
+.error .message {
+    font-size: 120%;
+    margin-bottom: 20px;
+    display: block;
+    font-weight: bold;
+}
 input {
     font-size: 50px;
     padding: 5px 5px 8px 5px;
