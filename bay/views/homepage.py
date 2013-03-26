@@ -5,57 +5,31 @@ from bay.models import File
 
 
 def homepage(request):
-    backgrounds = [{
-        'file': 'string_of_pearls.jpg',
-        'author': u'Gilles Chiroleu'
-    }, {
-        'file': 'soprano_saxophone.jpg',
-        'author': u'soupboy'
-    }, {
-        'file': 'piano.jpg',
-        'author': u'Mourner'
-    }, {
-        'file': 'cello.jpg',
-        'author': u'cellonaut'
-    }, {
-        'file': 'electric_guitar.jpg',
-        'author': u'Feliciano Guimaraes'
-    }, {
-        'file': 'portuguese_guitar.jpg',
-        'author': u'Feliciano Guimaraes'
-    }, {
-        'file': 'bass_guitar.jpg',
-        'author': u'Feliciano Guimaraes'
-    }, {
-        'file': 'electric_guitar2.jpg',
-        'author': u'a_roadbiker'
-    }, {
-        'file': 'broken_key.jpg',
-        'author': u'janoma.cl'
-    }, {
-        'file': 'viola.jpg',
-        'author': u'Mourner'
-    }, {
-        'file': 'piano2.jpg',
-        'author': u'Robert Couse-Baker'
-    }, {
-        'file': 'score.jpg',
-        'author': u'photosteve101'
-    }, {
-        'file': 'score2.jpg',
-        'author': u'pfly'
-    }, {
-        'file': 'score3.jpg',
-        'author': u'Brandon Giesbrecht'
-    }, {
-        'file': 'music.jpg',
-        'author': u'Ferrari + caballos + fuerza = cerebro Humano'
-    } ]
+    backgrounds = (
+        ('string_of_pearls.jpg', 'Gilles Chirole'),
+        ('soprano_saxophone.jpg', 'soupboy'),
+        ('piano.jpg', 'Mourner'),
+        ('cello.jpg', 'cellonaut'),
+        ('electric_guitar.jpg', 'Feliciano Guimaraes'),
+        ('portuguese_guitar.jpg', 'Feliciano Guimaraes'),
+        ('bass_guitar.jpg', 'Feliciano Guimaraes'),
+        ('electric_guitar2.jpg', 'a_roadbiker'),
+        ('broken_key.jpg', 'janoma.cl'),
+        ('viola.jpg', 'Mourner'),
+        ('piano2.jpg', 'Robert Couse-Baker'),
+        ('score.jpg', 'photosteve101'),
+        ('score2.jpg', 'pfly'),
+        ('score3.jpg', 'Brandon Giesbrecht'),
+        ('music.jpg', 'Ferrari + caballos + fuerza = cerebro Humano')
+    )
 
     background = random.choice(backgrounds)
 
     ctx = {
-        'image': background
+        'image': {
+            'file': background[0],
+            'author': background[1]
+        }
     }
 
     return render(request, 'song/search.html', ctx)
